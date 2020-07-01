@@ -20,10 +20,8 @@ func echo(w http.ResponseWriter, r *http.Request) {
 	if sleepIntv, err := strconv.Atoi(query.Get("sleep_intv")); err == nil {
 		time.Sleep(time.Millisecond * time.Duration(sleepIntv))
 	}
-	id := query.Get("id")
-	message := query.Get("payload")
 	timeSent, _ := strconv.ParseInt(query.Get("time_sent"), 10, 64)
-	payload := Payload{id, timeSent, message, timeRecv}
+	payload := Payload{query.Get("id"), timeSent, query.Get("payload"), timeRecv}
 	out, _ := json.Marshal(payload)
 
 	w.Header().Set("Content-Type", "application/json")
