@@ -28,7 +28,12 @@ func echo(w http.ResponseWriter, r *http.Request) {
 	w.Write(out)
 }
 
+func helloWorld(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(200)
+}
+
 func main() {
+	http.HandleFunc("/", helloWorld)
 	http.HandleFunc("/echo", echo)
 	http.ListenAndServe("0.0.0.0:8000", nil)
 }
